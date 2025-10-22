@@ -354,7 +354,28 @@ const people = [
   },
 ];
 
-// eslint-disable-next-line no-console
-console.log(people); // you can remove it
+const tableElement = document.querySelector('table');
 
-// write your code here
+for (const personToAdd of people) {
+  const personAge = personToAdd.died - personToAdd.born;
+  const century = Math.ceil(personToAdd.died / 100);
+  let gender = '';
+
+  if (personToAdd.sex === 'm') {
+    gender = 'Male';
+  } else {
+    gender = 'Female';
+  }
+
+  const tagInTable = (`
+    <tr>
+      <th>${personToAdd.name}</th>
+      <th>${gender}</th>
+      <th>${personToAdd.born}</th>
+      <th>${personToAdd.died}</th>
+      <th>${personAge}</th>
+      <th>${century}</th>
+    </tr>
+  `);
+  tableElement.insertAdjacentHTML('beforeend', tagInTable);
+}
