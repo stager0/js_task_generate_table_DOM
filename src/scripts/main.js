@@ -354,7 +354,7 @@ const people = [
   },
 ];
 
-const tableElement = document.querySelector('table');
+const tableElement = document.querySelector('.dashboard');
 
 for (const personToAdd of people) {
   const personAge = personToAdd.died - personToAdd.born;
@@ -367,15 +367,21 @@ for (const personToAdd of people) {
     gender = 'Female';
   }
 
-  const tagInTable = (`
-    <tr>
-      <th>${personToAdd.name}</th>
-      <th>${gender}</th>
-      <th>${personToAdd.born}</th>
-      <th>${personToAdd.died}</th>
-      <th>${personAge}</th>
-      <th>${century}</th>
-    </tr>
-  `);
-  tableElement.insertAdjacentHTML('beforeend', tagInTable);
+  const newTag = document.createElement('tr');
+  const iterArr = [
+    personToAdd.name,
+    gender,
+    personToAdd.born,
+    personToAdd.died,
+    personAge,
+    century
+  ];
+
+  for (let iter of iterArr) {
+    const thElement = document.createElement('td');
+    thElement.textContent = iter;
+    newTag.appendChild(thElement);
+  }
+
+  tableElement.appendChild(newTag)
 }
